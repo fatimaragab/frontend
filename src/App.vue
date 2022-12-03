@@ -1,30 +1,85 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
   <router-view/>
 </template>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+* {
+  box-sizing: border-box;
+  padding: 0px;
 }
 
-nav {
-  padding: 30px;
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  height: 150%;
+  width: 9%;
+  padding: 20px;/* Should be removed. Only for demonstration */
+}
+.column2 {
+  float: left;
+  height: 95%;
+  width: 91%;
+  padding: 20px; /* Should be removed. Only for demonstration */
+}
+.column3{
+  float: left;
+  height: auto;
+  width: auto;
+  padding: 20px;
+  column-gap: 60px;
+  column-rule: 4px double;
+}
+.lastcol{
+  float: left;
+  height: 100px;
+  width: 350px;
+  padding: 20px;
+  margin-right:60px;
+  column-rule: 4px double;
+}
+.header{
+  height: auto;
+  width: auto;
+}
+.text{
+  float: left;
+  height: 150px;
+  width: 350px;
+  padding: 20px;
+  color:#217074;
+  border-radius: 30px 30px 30px 30px;
+  margin: 10px;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.glyphicon {
+  font-size: 30px;
+  padding: 35px;
+  width: auto;
+  color: #217074;
+}
+.today{
+  background-color: transparent;
+}
+.time{
+  padding: 15px;
+  color: #217074;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+#main {
+  margin: auto;
+  width: 400px;
+}
+.text2{
+  float: left;
+  height: 95%;
+  width: 94%;
+  color:#217074;
+  margin: 25px;
+  padding: 20px;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
