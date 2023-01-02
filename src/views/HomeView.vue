@@ -81,19 +81,20 @@
           <br>
           <p style="color: lightslategrey;">--------------------------------------------------------</p>
           <br>
-          <h4>Completed: 1/3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Add Task</h4>
+          <h4>Completed: 1/3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="secpage.vue" class="btn btn-primary" role="button">Add Task</a></h4>
         </div>
         <div class="lastcol" style="background-color: #EDC5AB">
           <br>
           <p style="color: lightslategrey;">--------------------------------------------------------</p>
           <br>
-          <h4>Completed: 0/3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Add Task</h4>
+
+          <h4>Completed: 0/3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="secpage.vue" class="btn btn-primary" role="button">Add Task</a> </h4>
         </div>
         <div class="lastcol" style="background-color: #EDC5AB">
           <br>
           <p style="color: lightslategrey;">--------------------------------------------------------</p>
           <br>
-          <h4>Completed: 0/2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Add Task</h4>
+          <h4>Completed: 0/2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="secpage.vue" class="btn btn-primary" role="button">Add Task</a></h4>
         </div>
       </div>
     </div>
@@ -103,7 +104,25 @@
 
 export default {
   name: 'HomeView',
-  components: {
+  data(){
+    return {
+      HomeView: []
+    }
+
+  },
+  mounted() {
+    const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + '/api/v1/ToDoList'
+    const requestOptions ={
+      method:'GET',
+      redirect: 'follow'
+    }
+
+    fetch(endpoint, requestOptions)
+        .then(response => response.json())
+        .then(result => result.forEach(HomeView =>{this.Homeview.push(tasks)}))
+        .catch(error => console.log('error', error))
+
   }
+
 }
 </script>
