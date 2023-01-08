@@ -8,9 +8,12 @@
 }
 
 /* Create two equal columns that floats next to each other */
+.home{
+  height: 100%;
+}
 .column {
   float: left;
-  height: 130%;
+  height: 100vh;
   width: 9%;
   padding: 20px;
   /* Should be removed. Only for demonstration */
@@ -18,7 +21,7 @@
 
 .column2 {
   float: left;
-  height: 130%;
+  height: 100vh;
   width: 91%;
   padding: 20px;
   /* Should be removed. Only for demonstration */

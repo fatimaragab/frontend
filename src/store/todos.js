@@ -4,14 +4,16 @@ const localStorageKey = "todos-store"
 
 const todosStore = createStore({
     state: {
-        todos: [
-            { title: "Hit the gym", isChecked: false },
-            { title: "Pay bills", isChecked: true }
-        ],
+        todos: {
+            'work': [],
+            'home': [],
+            'others': [],
+        },
     },
     mutations: {
         initialiseStore(state) {
             // Check if the ID exists
+            // console.log(localStorage.getItem(localStorageKey));
             if (localStorage.getItem(localStorageKey)) {
                 // Replace the state object with the stored item
                 this.replaceState(
@@ -20,22 +22,24 @@ const todosStore = createStore({
             }
         },
         createTodo(state, payload) {
-
-            const newTodo = payload
-
-            state.todos.push(newTodo)
+            const newTodo = {
+                title: payload.title,
+                isChecked: false,
+            }
+            if(!state.todos[payload.type]) state.todos[payload.type] = [];
+            state.todos[payload.type].push(newTodo)
         },
         removeTodo(state, payload) {
 
-            state.todos = state.todos.filter((todo, index) => index !== payload.indexToRemove)
+            state.todos[payload.type] = state.todos[payload.type].filter((todo, index) => index !== payload.indexToRemove)
         },
         toggleTodoCheck(state, payload) {
 
-            state.todos[payload.indexToUpdate].isChecked = !state.todos[payload.indexToUpdate].isChecked
+            state.todos[payload.type][payload.indexToUpdate].isChecked = !state.todos[payload.type][payload.indexToUpdate].isChecked
         },
         updateTodoTitle(state, payload) {
 
-            state.todos[payload.indexToUpdate].title = payload.title
+            state.todos[payload.type][payload.indexToUpdate].title = payload.title
         },
     },
     computed: {

@@ -53,7 +53,7 @@
 <script>
 import { mapState } from 'vuex';
 
-import todosStore from "../store/todos"
+import todosStore1 from "../store/todos"
 
 export default {
   computed: mapState({

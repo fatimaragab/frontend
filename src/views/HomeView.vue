@@ -28,7 +28,7 @@
         <div class="text" style="background-color: #E7EAEF">
 
 
-          <form v-on:submit.prevent="createItem">
+          <form v-on:submit.prevent="createItem(1)">
             &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
 
 
@@ -39,12 +39,14 @@
               </div>
 
               <ul>
-                <li v-for="(item, index) in todos" :class="{ checked: item.isChecked }"
-                    @click.native="toggleItemCheck(index)">
-                  <span :contenteditable="editableIndex === index" :ref="'todo-' + index">{{ item.title }}</span>
+                <li v-for="(item, index) in todos['work']" :class="{ checked: item.isChecked }"
+                    @click.native="toggleItemCheck(index, 1)">
+                  <span :contenteditable="editableIndex[0] === index" :ref="'1todo-' + index">{{ item.title }}</span>
 
-                  <button @click.native.stop="removeItem(index)" class="close" type="button">x</button>
-                  <button @click.native.stop="toggleEditMode(index)" class="close" type="button">edit</button>
+                  <button @click.native.stop="removeItem(index, 1)" class="close" type="button">x</button>
+                  <button @click.native.stop="toggleEditMode(index, 1)" class="close" type="button">{{
+                      (editableIndex[0] === index) ? "Save" : "Edit"
+                    }}</button>
                 </li>
               </ul>
             </div>
@@ -62,23 +64,25 @@
 
         <br>
         <div class="text" style="background-color: #E7EAEF">
-          <form v-on:submit.prevent="createItem">
+          <form v-on:submit.prevent="createItem(2)">
 
 
             <div class="todosContainer2">
               <div class="formContainer">
-                <input v-model="text" type="text" placeholder="New Todo Title" class="input">
+                <input v-model="text2" type="text" placeholder="New Todo Title" class="input">
 
-                <button class="addBtn" :disabled="text.length < 1" type="submit">Add Todo</button>
+                <button class="addBtn" :disabled="text2.length < 1" type="submit">Add Todo</button>
               </div>
 
               <ul>
-                <li v-for="(item, index) in todos" :class="{ checked: item.isChecked }"
-                    @click.native="toggleItemCheck(index)">
-                  <span :contenteditable="editableIndex === index" :ref="'todo-' + index">{{ item.title }}</span>
+                <li v-for="(item, index) in todos['home']" :class="{ checked: item.isChecked }"
+                    @click.native="toggleItemCheck(index, 2)">
+                  <span :contenteditable="editableIndex[1] === index" :ref="'2todo-' + index">{{ item.title }}</span>
 
-                  <button @click.native.stop="removeItem(index)" class="close" type="button">x</button>
-                  <button @click.native.stop="toggleEditMode(index)" class="close" type="button">edit</button>
+                  <button @click.native.stop="removeItem(index, 2)" class="close" type="button">x</button>
+                  <button @click.native.stop="toggleEditMode(index, 2)" class="close" type="button">{{
+                      (editableIndex[1] === index) ? "Save" : "Edit"
+                    }}</button>
                 </li>
               </ul>
             </div>
@@ -92,18 +96,20 @@
         <div >
           <div class="text" style="background-color: #E7EAEF">
 
-            <form v-on:submit.prevent="createItem">
+            <form v-on:submit.prevent="createItem(3)">
               <div class="todosContainer0">
                 <div class="formContainer">
-                  <input v-model="text" type="text" placeholder="New Todo Title" class="input">
-                  <button class="addBtn" :disabled="text.length < 1" type="submit">Add Todo</button>
+                  <input v-model="text3" type="text" placeholder="New Todo Title" class="input">
+                  <button class="addBtn" :disabled="text3.length < 1" type="submit">Add Todo</button>
                 </div>
                 <ul>
-                  <li v-for="(item, index) in todos" :class="{ checked: item.isChecked }"
-                      @click.native="toggleItemCheck(index)">
-                    <span :contenteditable="editableIndex === index" :ref="'todo-' + index">{{ item.title }}</span>
-                    <button @click.native.stop="removeItem(index)" class="close" type="button">x</button>
-                    <button @click.native.stop="toggleEditMode(index)" class="close" type="button">edit</button>
+                  <li v-for="(item, index) in todos['others']" :class="{ checked: item.isChecked }"
+                      @click.native="toggleItemCheck(index, 3)">
+                    <span :contenteditable="editableIndex[2] === index" :ref="'3todo-' + index">{{ item.title }}</span>
+                    <button @click.native.stop="removeItem(index, 3)" class="close" type="button">x</button>
+                    <button @click.native.stop="toggleEditMode(index, 3)" class="close" type="button">{{
+                        (editableIndex[2] === index) ? "Save" : "Edit"
+                      }}</button>
                   </li>
                 </ul>
               </div>
@@ -144,55 +150,106 @@
 import { mapState } from 'vuex';
 
 import todosStore from "../store/todos"
-import todosStore2 from "../store/todos"
 
 
 export default {
   computed: mapState({
-    todos: state => state.todos
+    todos: state => state.todos,
   }),
   name: 'HomeView',
   data() {
     return {
-      HomeView: [], time: '', text: "",
-      editableIndex: null,
+      HomeView: [], time: '', text: "", text2: "", text3: "",
+      editableIndex: [null, null, null],
     }
 
   },
   methods: {
-    createItem() {
-
-      if (this.text.length < 1) return
-
-      // create a new item where the title is the current value of the input field
-      const newItem = {
-        title: this.text,
-        isChecked: false,
+    createItem(type) {
+      if(type == 1){
+        if (this.text.length < 1) return
+        const newItem = {
+          title: this.text,
+          isChecked: false,
+          type: 'work'
+        }
+        todosStore.commit("createTodo", newItem)
+        this.text = ""
       }
-      todosStore.commit("createTodo", newItem)
-      todosStore2.commit("createTodo", newItem)
-
-      this.text = ""
+      else if(type == 2){
+        if (this.text2.length < 1) return
+        const newItem = {
+          title: this.text2,
+          isChecked: false,
+          type: 'home'
+        }
+        todosStore.commit("createTodo", newItem)
+        this.text2 = ""
+      }
+      else if(type == 3){
+        if (this.text3.length < 1) return
+        const newItem = {
+          title: this.text3,
+          isChecked: false,
+          type: 'others'
+        }
+        todosStore.commit("createTodo", newItem)
+        this.text3 = ""
+      }
     },
-    toggleItemCheck(indexToUpdate) {
-
-      todosStore.commit("toggleTodoCheck", {indexToUpdate})
-      todosStore2.commit("toggleTodoCheck", {indexToUpdate})
+    toggleItemCheck(indexToUpdate, type) {
+      if(type == 1){
+        todosStore.commit("toggleTodoCheck", {indexToUpdate: indexToUpdate, type: 'work'})
+      }
+      else if(type == 2){
+        todosStore.commit("toggleTodoCheck", {indexToUpdate: indexToUpdate, type: 'home'})
+      }
+      else if(type == 3){
+        todosStore.commit("toggleTodoCheck", {indexToUpdate: indexToUpdate, type: 'others'})
+      }
     },
-    removeItem(indexToRemove) {
-
-      todosStore.commit("removeTodo", {indexToRemove})
-      todosStore2.commit("removeTodo", {indexToRemove})
+    removeItem(indexToRemove, type) {
+      if(type == 1){
+        todosStore.commit("removeTodo", {indexToRemove: indexToRemove, type: 'work'})
+      }
+      else if(type == 2){
+        todosStore.commit("removeTodo", {indexToRemove: indexToRemove, type: 'home'})
+      }
+      else if(type == 3){
+        todosStore.commit("removeTodo", {indexToRemove: indexToRemove, type: 'others'})
+      }
     },
-    updateItem(indexToUpdate, title) {
-
-      todosStore.commit("updateTodoTitle", {indexToUpdate, title})
-      todosStore2.commit("updateTodoTitle", {indexToUpdate, title})
+    updateItem(indexToUpdate, title, type) {
+      if(type == 1){
+        todosStore.commit("updateTodoTitle", {indexToUpdate: indexToUpdate, title: title, type: 'work'})
+      }
+      else if(type == 2){
+        todosStore.commit("updateTodoTitle", {indexToUpdate: indexToUpdate, title: title, type: 'home'})
+      }
+      else if(type == 3){
+        todosStore.commit("updateTodoTitle", {indexToUpdate: indexToUpdate, title: title, type: 'others'})
+      }
     },
-    toggleEditMode(index) {
-      this.editableIndex = index
-
-      setTimeout(() => this.$refs["todo-" + index][0].focus())
+    toggleEditMode(index, type) {
+      if(this.editableIndex[type - 1] === index){
+        var new_data = this.$refs[type+"todo-" + index][0].innerHTML;
+        if(type == 1){
+          todosStore.commit("updateTodoTitle", {indexToUpdate: index, title: new_data, type: 'work'})
+        }
+        else if(type == 2){
+          todosStore.commit("updateTodoTitle", {indexToUpdate: index, title: new_data, type: 'home'})
+        }
+        else if(type == 3){
+          todosStore.commit("updateTodoTitle", {indexToUpdate: index, title: new_data, type: 'others'})
+        }
+        this.editableIndex[type - 1] = null;
+      }
+      else{
+        this.editableIndex[type - 1] = index;
+        setTimeout(()=>{
+          this.$refs[type+"todo-" + index][0].focus();
+        })
+      }
     },
 
 
