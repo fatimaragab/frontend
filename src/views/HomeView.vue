@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="column" style="background-color:#E7EAEF;">
-      <img src="@/assets/calender-day-love-svgrepo-com.svg" alt="logo" height="80px" width="80px">
+      <img src="@/assets/calender-day-love-svgrepo-com.svg" alt="logo" height="80" width="80">
       <br> <br> <br> <br> <br> <br><br> <br> <br> <br>
       <calendar :events="events" @select="onSelect" class="glyphicon glyphicon-calendar icon" />
       <br>
