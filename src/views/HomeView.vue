@@ -1,146 +1,222 @@
 <template>
-  <div className="home">
-    <div className="column" style="background-color:#E7EAEF;">
+  <div class="home">
+    <div class="column" style="background-color:#E7EAEF;">
       <img src="@/assets/calender-day-love-svgrepo-com.svg" alt="logo" height="80px" width="80px">
       <br> <br> <br> <br> <br> <br><br> <br> <br> <br>
-      <span className="glyphicon glyphicon-calendar icon"></span>
+      <calendar :events="events" @select="onSelect" class="glyphicon glyphicon-calendar icon" />
       <br>
-      <span className="glyphicon glyphicon-check"></span>
+      <span class="glyphicon glyphicon-check"></span>
       <br>
-      <span className="glyphicon glyphicon-cog active"></span>
-      <br> <br><br> <br> <br> <br> <br> <br><br><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+      <span class="glyphicon glyphicon-cog active"></span>
+      <br> <br><br> <br> <br> <br> <br> <br><br><br> <br> <br> <br> <br> <br> <br> <br>
       <div>
-        <h1 style="color:#217074;">11:00 </h1>
-        <br>
-        <h1 style="color:#217074;">NOV 30 </h1>
+        <p style="font-size: 18px"> {{ time }}</p>
       </div>
     </div>
-    <div className="column2" style="background-color: #EDC5AB">
-      <div className="header" style="background-color: #EDC5AB">
+    <div class="column2" style="background-color: #EDC5AB">
+      <div class="header" style="background-color: #EDC5AB">
         <h3 style="color:#E7EAEF;"> &nbsp;&nbsp;30 NOV &nbsp; &nbsp;<u>Today</u> &nbsp; &nbsp; 2 Dec &nbsp; |&nbsp;
           <span>&#183;</span><span>&#183;</span><span>&#183;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Categories:3/4
-          <span className="glyphicon glyphicon-circle-arrow-left"></span> <span
-              className="glyphicon glyphicon-circle-arrow-right"></span></h3>
+          <span class="glyphicon glyphicon-circle-arrow-left"></span> <span
+              class="glyphicon glyphicon-circle-arrow-right"></span></h3>
       </div>
-      <div className="column3" style="background-color: #EDC5AB">
-        <h2 style="color:#217074;">Work & School &nbsp; &nbsp; <span>&#183;</span><span>&#183;</span><span>&#183;</span>
-          &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </h2>
-        <br><br>
-        <div className="text" style="background-color: #fff">
-          <h4>Programming lecture</h4>
-          <h7 style="color:lightslategrey;"> School</h7>
-          <h5>12:00-13:00</h5>
-        </div>
-        <br>
-        <div className="text" style="background-color: #fff">
-          <h4>Meeting with client</h4>
-          <h7 style="color:lightslategrey;"> Work</h7>
-          <h5>15:00-16:00</h5>
-        </div>
-        <br>
-        <p style="color: lightslategrey;">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;------------------------DONE------------------------</p>
-        <div className="text" style="background-color: #fff">
-          <h4>Go to the doctor</h4>
-          <h7 style="color:lightslategrey;"> dentist</h7>
-          <h5>16:00-16:30</h5>
-        </div>
-      </div>
-      <div className="column3" style="background-color: #EDC5AB">
-        <h3 style="color:#217074;"> Home &nbsp; &nbsp; <span>&#183;</span><span>&#183;</span><span>&#183;</span>&nbsp;
-          &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          &nbsp;</h3>
-        <br><br>
-        <div className="text" style="background-color: #fff">
-          <h4>Grocery shopping</h4>
-          <h7 style="color:lightslategrey;"> check shopping list</h7>
-          <h5>17:00-18:00</h5>
-        </div>
-        <br>
-        <div className="text" style="background-color: #fff">
-          <h4>Dinner</h4>
-          <h7 style="color:lightslategrey;"> check menu</h7>
-          <h5>18:00-18:15</h5>
-        </div>
-        <br>
-        <div className="text" style="background-color: #fff">
-          <h4>Walk the dog</h4>
-          <h5>18:15-18:30</h5>
-        </div>
-      </div>
-      <div className="column3" style="background-color: #EDC5AB">
-        <h3 style="color:#217074;"> Others &nbsp; &nbsp; <span>&#183;</span><span>&#183;</span><span>&#183;</span></h3>
-        <br><br>
-        <div className="text" style="background-color: #fff">
-          <h4>Meeting with friends</h4>
-          <h7 style="color:lightslategrey;"> at the park</h7>
-          <h5>19:00-22:00</h5>
-        </div>
-        <br>
-        <div className="text" style="background-color: #fff">
-          <h4>Give Camera Back</h4>
-          <h7 style="color:lightslategrey;"> to john</h7>
-          <h5>until 10</h5>
-        </div>
-      </div>
-      <div className="column3" style="background-color: #EDC5AB">
-        <div className="lastcol" style="background-color: #EDC5AB">
-          <br>
-          <p style="color: lightslategrey;">----`----------------------------------------------------</p>
-          <br>
-          <h4>Completed: 1/3
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
-                href="SecPage" className="btn btn-primary" role="button">Add Task</a></h4>
-        </div>
-        <div className="lastcol" style="background-color: #EDC5AB">
-          <br>
-          <p style="color: lightslategrey;">--------------------------------------------------------</p>
-          <br>
+      <div class="column3" style="background-color: #EDC5AB">
+        <h1 style="color:#217074;" >Work & School &nbsp; &nbsp; </h1>
+        <div class="text" style="background-color: #E7EAEF">
 
-          <h4>Completed:
-            0/3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                href="SecPage" className="btn btn-primary" role="button">Add Task</a></h4>
+
+          <form v-on:submit.prevent="createItem">
+            &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+
+
+            <div class="todosContainer1">
+              <div class="formContainer">
+                <input v-model="text" type="text" placeholder="New Todo Title" class="input">
+                <button class="addBtn" :disabled="text.length < 1" type="submit">Add Todo</button>
+              </div>
+
+              <ul>
+                <li v-for="(item, index) in todos" :class="{ checked: item.isChecked }"
+                    @click.native="toggleItemCheck(index)">
+                  <span :contenteditable="editableIndex === index" :ref="'todo-' + index">{{ item.title }}</span>
+
+                  <button @click.native.stop="removeItem(index)" class="close" type="button">x</button>
+                  <button @click.native.stop="toggleEditMode(index)" class="close" type="button">edit</button>
+                </li>
+              </ul>
+            </div>
+          </form>
         </div>
-        <div className="lastcol" style="background-color: #EDC5AB">
-          <br>
-          <p style="color: lightslategrey;">--------------------------------------------------------</p>
-          <br>
-          <h4>Completed:
-            0/2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
-                href="SecPage" className="btn btn-primary" role="button">Add Task</a></h4>
+      </div>
+
+      <div class="column3" style="background-color: #EDC5AB">
+        <h1 style="color:#217074;"> Home &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp;</h1>
+
+
+
+
+        <br>
+        <div class="text" style="background-color: #E7EAEF">
+          <form v-on:submit.prevent="createItem">
+
+
+            <div class="todosContainer2">
+              <div class="formContainer">
+                <input v-model="text" type="text" placeholder="New Todo Title" class="input">
+
+                <button class="addBtn" :disabled="text.length < 1" type="submit">Add Todo</button>
+              </div>
+
+              <ul>
+                <li v-for="(item, index) in todos" :class="{ checked: item.isChecked }"
+                    @click.native="toggleItemCheck(index)">
+                  <span :contenteditable="editableIndex === index" :ref="'todo-' + index">{{ item.title }}</span>
+
+                  <button @click.native.stop="removeItem(index)" class="close" type="button">x</button>
+                  <button @click.native.stop="toggleEditMode(index)" class="close" type="button">edit</button>
+                </li>
+              </ul>
+            </div>
+          </form>
         </div>
+      </div>
+
+      <div class="column3" style="background-color: #EDC5AB">
+        <h1 style="color:#217074;"> Others &nbsp; &nbsp; </h1>
+        <br><br>
+        <div >
+          <div class="text" style="background-color: #E7EAEF">
+
+            <form v-on:submit.prevent="createItem">
+              <div class="todosContainer0">
+                <div class="formContainer">
+                  <input v-model="text" type="text" placeholder="New Todo Title" class="input">
+                  <button class="addBtn" :disabled="text.length < 1" type="submit">Add Todo</button>
+                </div>
+                <ul>
+                  <li v-for="(item, index) in todos" :class="{ checked: item.isChecked }"
+                      @click.native="toggleItemCheck(index)">
+                    <span :contenteditable="editableIndex === index" :ref="'todo-' + index">{{ item.title }}</span>
+                    <button @click.native.stop="removeItem(index)" class="close" type="button">x</button>
+                    <button @click.native.stop="toggleEditMode(index)" class="close" type="button">edit</button>
+                  </li>
+                </ul>
+              </div>
+            </form>
+          </div>
+        </div>
+
+
+
+
+      </div>
+      <br>
+      <div>
+
       </div>
     </div>
+
   </div>
 </template>
+
+<style>
+.text-box {
+
+  color: #444;
+
+  height: 4.4rem;
+  padding: 0 1.5rem;
+
+  border-radius: 4px;
+
+  font-size: 16px;
+
+  border: none;
+
+}
+</style>
 <script>
+import { mapState } from 'vuex';
+
+import todosStore from "../store/todos"
+import todosStore2 from "../store/todos"
+
 
 export default {
+  computed: mapState({
+    todos: state => state.todos
+  }),
   name: 'HomeView',
   data() {
     return {
-      HomeView: []
+      HomeView: [], time: '', text: "",
+      editableIndex: null,
     }
 
   },
-  mounted() {
-    const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + '/api/v1/ToDoList'
-    const requestOptions = {
-      method: 'GET',
-      redirect: 'follow'
+  methods: {
+    createItem() {
+
+      if (this.text.length < 1) return
+
+      // create a new item where the title is the current value of the input field
+      const newItem = {
+        title: this.text,
+        isChecked: false,
+      }
+      todosStore.commit("createTodo", newItem)
+      todosStore2.commit("createTodo", newItem)
+
+      this.text = ""
+    },
+    toggleItemCheck(indexToUpdate) {
+
+      todosStore.commit("toggleTodoCheck", {indexToUpdate})
+      todosStore2.commit("toggleTodoCheck", {indexToUpdate})
+    },
+    removeItem(indexToRemove) {
+
+      todosStore.commit("removeTodo", {indexToRemove})
+      todosStore2.commit("removeTodo", {indexToRemove})
+    },
+    updateItem(indexToUpdate, title) {
+
+      todosStore.commit("updateTodoTitle", {indexToUpdate, title})
+      todosStore2.commit("updateTodoTitle", {indexToUpdate, title})
+    },
+    toggleEditMode(index) {
+      this.editableIndex = index
+
+      setTimeout(() => this.$refs["todo-" + index][0].focus())
+    },
+
+
+    mounted() {
+      const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + '/api/v1/ToDoList'
+      const requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      }
+
+      fetch(endpoint, requestOptions)
+          .then(response => response.json())
+          .then(result => result.forEach(HomeView => {
+            this.Homeview.push(tasks)
+          }))
+          .catch(error => console.log('error', error))
+
+      setInterval(() => {
+        this.time = new Date().toLocaleTimeString();
+      }, 1000);
+
     }
-
-    fetch(endpoint, requestOptions)
-        .then(response => response.json())
-        .then(result => result.forEach(HomeView => {
-          this.Homeview.push(tasks)
-        }))
-        .catch(error => console.log('error', error))
-
-  }
-
+  },
 }
+
+
 </script>
