@@ -8,23 +8,25 @@
       <span class="glyphicon glyphicon-check"></span>
       <br>
       <span class="glyphicon glyphicon-cog active"></span>
-      <br> <br><br> <br> <br> <br> <br> <br><br><br> <br> <br> <br> <br> <br> <br> <br>
-      <div>
-        <p style="font-size: 18px"> {{ time }}</p>
+
+      <div class="timeau"><p style="font-size: 18px"> {{ time }}</p>
       </div>
     </div>
     <div class="column2" style="background-color: #EDC5AB">
       <div class="header" style="background-color: #EDC5AB">
-        <h3 style="color:#E7EAEF;"> &nbsp;&nbsp;30 NOV &nbsp; &nbsp;<u>Today</u> &nbsp; &nbsp; 2 Dec &nbsp; |&nbsp;
-          <span>&#183;</span><span>&#183;</span><span>&#183;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <h1 style="color:#E7EAEF;"> &nbsp;&nbsp;&nbsp; &nbsp;<u>Today's TodoList</u> &nbsp; &nbsp;  &nbsp; &nbsp;
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Categories:3/4
-          <span class="glyphicon glyphicon-circle-arrow-left"></span> <span
-              class="glyphicon glyphicon-circle-arrow-right"></span></h3>
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Categories: 3/3 &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </h1>
       </div>
       <div class="column3" style="background-color: #EDC5AB">
-        <h1 style="color:#217074;" >Work & School &nbsp; &nbsp; </h1>
+        <h1 style="color:#217074;" >&nbsp; &nbsp; Work & School : <br>&nbsp; &nbsp;</h1>
         <div class="text" style="background-color: #E7EAEF">
 
 
@@ -35,7 +37,7 @@
             <div class="todosContainer1">
               <div class="formContainer">
                 <input v-model="text" type="text" placeholder="New Todo Title" class="input">
-                <button class="addBtn" :disabled="text.length < 1" type="submit">Add Todo</button>
+                <button class="addBtn" :disabled="text.length < 1" type="submit" >Add Todo</button>
               </div>
 
               <ul>
@@ -55,9 +57,8 @@
       </div>
 
       <div class="column3" style="background-color: #EDC5AB">
-        <h1 style="color:#217074;"> Home &nbsp; &nbsp;
-          &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          &nbsp;</h1>
+        <h1 style="color:#217074;"> &nbsp; &nbsp;Home : &nbsp; &nbsp; </h1>
+        <br>
 
 
 
@@ -91,7 +92,7 @@
       </div>
 
       <div class="column3" style="background-color: #EDC5AB">
-        <h1 style="color:#217074;"> Others &nbsp; &nbsp; </h1>
+        <h1 style="color:#217074;"> &nbsp; &nbsp; Others : &nbsp; &nbsp; </h1>
         <br><br>
         <div >
           <div class="text" style="background-color: #E7EAEF">
@@ -161,10 +162,33 @@ export default {
     return {
       HomeView: [], time: '', text: "", text2: "", text3: "",
       editableIndex: [null, null, null],
+      task : '',
+      done : ''
     }
 
   },
   methods: {
+    saveItem () {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        task: this.task,
+        done: this.done
+      });
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      }
+
+      fetch("http://localhost:8080/api/v1/ToDoList", requestOptions)
+          .then(response => response.text())
+          .then(result => console.log(result))
+          .catch(error => console.log('error', error));
+    },
     createItem(type) {
       if(type == 1){
         if (this.text.length < 1) return
@@ -272,8 +296,10 @@ export default {
       }, 1000);
 
     }
-  },
 }
+}
+
+
 
 
 </script>

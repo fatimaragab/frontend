@@ -79,8 +79,13 @@
 }
 
 .time {
-  padding: 15px;
+  padding: 20px;
   color: #217074;
+
+}
+timeau{
+  width: 20px;
+  height: 20px;
 }
 
 #main {
